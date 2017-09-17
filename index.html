@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Inventory</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -10,16 +10,76 @@
       <!-- Do not add `script` tags-->
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+      <!-- Handlebars Script -->
+      <script src=https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js></script>
     </head>
     <body class="container-fluid">
-      <h1>Example</h1>
+      <h1>Inventory</h1>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
+      <form class="accounts" id="create-account">
+        <h1>Create a new account</h1>
+        <input required type="text" name="credentials[email]" placeholder="Username">
+        <input required type="password" name="credentials[password]" placeholder="Password">
+        <input required type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+        <button type="submit" id="create-button">Create an Account</button>
+      </form>
+
+      <form class="accounts" id="signin-account">
+        <h1> Sign in to your account</h1>
+        <input required type="text" name="credentials[email]" placeholder="Username">
+        <input required type="password" name="credentials[password]" placeholder="Password">
+        <button type="submit" id="signin-button">Sign in</button>
+      </form>
+
+      <form class="accounts" id="change-password">
+        <h1> Change password</h1>
+        <input required type="password" name="passwords[old]" placeholder="Old password">
+        <input required type="password" name="passwords[new]" placeholder="New password">
+        <button type="submit" id="change-password-button">Change password</button>
+      </form>
+
+      <form class="accounts" id="signout-account">
+        <h1> Sign out</h1>
+        <button type="submit" id="signout-button">Sign out</button>
+      </form
+
+      <button id='get-table' class='button' type='submit'>Get Inventory Table</button>
+
+      <div id='table-holder'>
+      </div>
+
+      <script id="product-inventory-template" type="text/x-handlebars-template">
+          <h1>Product Inventory</h1>
+          <br>
+            <table class='table'>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Product Name</th>
+                  <th>SKU Number</th>
+                  <th>Department</th>
+                  <th>Quantity</th>
+                  <th>Unit</th>
+                </tr>
+              </thead>
+              <tbody id='append-products-here'>
+              {{#each fields}}
+              <form class='row-form' id={{_id}}>
+                <tr class={{_id}}>
+                  <td>{{_id}}</td>
+                  <td>{{product_name}}</td>
+                  <td>{{sku_number}}</td>
+                  <td>{{department}}</td>
+                  <td><input type='number' name='quantity_number' value={{quantity_number}}></td>
+                  <td><input type='text' name='quantity_unit' value={{quantity_unit}}></td>
+                  <td><a class="button" data-id={{_id}}>Update</a></td>
+                  <td><a class="button" data-id={{_id}}>Delete</a></td>
+                </tr>
+              </form>
+              {{/each}}
+              </tbody>
+            </table>
+        </script>
+
     </body>
 </html>
