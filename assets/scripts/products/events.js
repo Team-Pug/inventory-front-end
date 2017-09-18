@@ -57,7 +57,7 @@ const onDeleteProduct = function (event) {
   console.log('passing through events.js')
   console.log(id)
   productApi.deleteProduct(id)
-    .then(productUi.onDeleteProductSuccess)
+    .then(productUi.onDeleteProductSuccess(id))
     .catch(productUi.onDeleteProductError)
 }
 
