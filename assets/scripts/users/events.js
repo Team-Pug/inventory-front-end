@@ -9,9 +9,13 @@ const onCreateAccount = function (event) {
   const data = getFormFields(event.target)
   console.log('passing through event js')
   console.log(data)
-  userApi.create(data)
-    .then(userUi.onCreateSuccess)
-    .catch(userUi.onError)
+  if (data.credentials.password !== data.credentials.password_confirmation) {
+    $(() => $('#password-match-error').show())
+  } else {
+    userApi.create(data)
+      .then(userUi.onCreateSuccess)
+      .catch(userUi.onError)
+  }
 }
 
 const onSignIn = function (event) {

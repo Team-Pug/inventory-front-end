@@ -42,9 +42,8 @@ const onGetAllProductsError = function (response) {
   console.error(response)
 }
 
-const onDeleteProductSuccess = function (id) {
-  console.log('you deleted a product!')
-  $('.' + id).remove()
+const onDeleteProductSuccess = function (data) {
+  $('.' + data.product.id).remove()
 }
 
 const onDeleteProductError = function (error) {

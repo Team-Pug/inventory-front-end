@@ -43,12 +43,15 @@ const updateProduct = function (data, id) {
     headers: {
       Authorization: 'Token token=' + app.user.token
     },
-    data
+    data: {
+      'product': {
+        'quantity_number': data.quantity_number
+      }
+    }
   })
 }
 
 const deleteProduct = function (id) {
-  console.log('passing through api.js')
   return $.ajax({
     url: app.host + '/products/' + id,
     method: 'DELETE',

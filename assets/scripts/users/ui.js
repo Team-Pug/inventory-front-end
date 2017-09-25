@@ -4,11 +4,17 @@ const app = require('../store.js')
 const ux = require('./ux.js')
 
 const onCreateSuccess = function () {
-  console.log('You successfully created an account')
+  $(() => {
+    $('.user-messages').children().hide()
+    $('#create-account-success').show()
+  })
 }
 
 const onError = function (response) {
-  console.error(response)
+  $(() => {
+    $('#create-account-error').show()
+    $('#password-match-error').hide()
+  })
 }
 
 const onSignInSuccess = function (data) {
@@ -18,20 +24,23 @@ const onSignInSuccess = function (data) {
 }
 
 const onSignInError = function (response) {
-  console.error(response)
+  $(() => $('#sign-in-error').show())
 }
 
 const onChangePasswordSuccess = function () {
   console.log('You succesfully change your password')
+  ux.changePasswordSuccess()
 }
 
 const onChangePasswordError = function (response) {
-  console.log(response)
+  console.log('I am in ui.js')
+  $('#password-change-error').show()
 }
 
 const onSignOutSuccess = function () {
   console.log('You successfully sign out')
   app.user = null
+  ux.signOut()
 }
 
 const onSignOutError = function (response) {
